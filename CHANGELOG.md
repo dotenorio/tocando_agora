@@ -1,3 +1,5 @@
+# Changelog #
+
 0.0.6
 - Não exibir notificações para títulos inválidos (que não são de música/vídeo)
 - Pequena melhoria nos logs exibidos na aba onde a extensão está ativa
