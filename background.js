@@ -2,7 +2,8 @@ function getTabs () {
   chrome.tabs.query({url: [
     '*://*.deezer.com/*',
     '*://*.youtube.com/*',
-    '*://*.spotify.com/*'
+    '*://*.spotify.com/*',
+    '*://play.google.com/music/*'
   ]}, function (tabs) {
     if (tabs.length > 0) {
       tabs.forEach(function (tab) {
@@ -30,6 +31,7 @@ function onNotify (title, url) {
   var regexYoutube = new RegExp("youtube.com");
   var regexDeezer = new RegExp("deezer.com");
   var regexSpotify = new RegExp("spotify.com");
+  var regexGooglePlayMusic = new RegExp("play.google.com");
   if (regexYoutube.test(url)) {
     var regexYoutubeWatch = new RegExp("youtube.com.*watch");
     if (!regexYoutubeWatch.test(url)) {
@@ -41,6 +43,13 @@ function onNotify (title, url) {
     contextMessage = 'Deezer';
   } else if (regexSpotify.test(url)) {
     contextMessage = 'Spotify';
+  } else if (regexGooglePlayMusic.test(url)) {
+    var splitGooglePlayMusic = title.split(' - ')
+    if (splitGooglePlayMusic.length < 2) {
+      console.log('Google Play Música não está tocando.');
+      return;
+    }
+    contextMessage = 'Google Play Music';
   }
   chrome.notifications.create(title, {
     title: manifest.name,

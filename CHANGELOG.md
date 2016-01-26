@@ -1,5 +1,9 @@
 # Changelog #
 
+0.1.6
+- Adicionando suporte para o Google Play Music
+- Mudança no padrão de versionamento, 0.0.0: [mudança significativa].[novo recurso].[correções]
+
 0.0.6
 - Não exibir notificações para títulos inválidos (que não são de música/vídeo)
 - Pequena melhoria nos logs exibidos na aba onde a extensão está ativa

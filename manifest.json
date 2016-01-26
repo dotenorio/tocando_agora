@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Tocando agora (beta)",
-  "version": "0.0.6",
-  "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube ou Spotify.",
+  "version": "0.1.6",
+  "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.",
   "background": {
     "scripts": [
       "background.js"
@@ -14,7 +14,8 @@
     "notifications",
     "*://*.deezer.com/*",
     "*://*.youtube.com/*",
-    "*://*.spotify.com/*"
+    "*://*.spotify.com/*",
+    "*://play.google.com/music/*"
   ],
   "icons": {
     "128": "icon_extension.png"
