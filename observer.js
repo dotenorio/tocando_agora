@@ -19,6 +19,7 @@ var observer = new window.MutationObserver(
     mutations.forEach(
       function (mutation) {
         title = mutation.target.textContent.trim()
+        if (title[0] === '\u25B6') title = title.substr(2, title.length)
         var titleReturn = [
           'YouTube',
           'Spotify',
@@ -28,7 +29,6 @@ var observer = new window.MutationObserver(
           'Google Play Música'
         ]
         if (titleReturn.indexOf(title) !== -1) return
-        if (title[0] === '\u25B6') title = title.substr(2, title.length)
         title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
         if (title === lastTitle) return
         emmitNotify(title)

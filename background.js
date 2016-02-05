@@ -47,7 +47,7 @@ function onNotify (title, url, id) {
     contextMessage = 'Spotify'
   } else if (regexGooglePlayMusic.test(url)) {
     var splitGooglePlayMusic = title.split(' - ')
-    if (splitGooglePlayMusic.length < 2) {
+    if (splitGooglePlayMusic.length < 2 || splitGooglePlayMusic[1].trim() == 'Single') {
       console.log('Google Play Música não está tocando.')
       return
     }

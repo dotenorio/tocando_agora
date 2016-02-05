@@ -1,5 +1,8 @@
 # Changelog #
 
+0.2.7
+- Correções na exibição de notificações
+
 0.2.6
 - Ao clicar na notificação, a aba correspondente é aberta
 
