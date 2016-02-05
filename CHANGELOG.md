@@ -1,7 +1,7 @@
 # Changelog #
 
 0.2.6
-- Ao clicar na notificação, a aba que emitiu é aberta
+- Ao clicar na notificação, a aba correspondente é aberta
 
 0.1.6
 - Adicionando suporte para o Google Play Music
