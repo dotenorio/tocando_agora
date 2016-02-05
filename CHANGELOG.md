@@ -1,5 +1,8 @@
 # Changelog #
 
+0.2.6
+- Ao clicar na notificação, a aba que emitiu é aberta
+
 0.1.6
 - Adicionando suporte para o Google Play Music
 - Mudança no padrão de versionamento, 0.0.0: [mudança significativa].[novo recurso].[correções]

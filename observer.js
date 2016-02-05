@@ -1,43 +1,45 @@
+/* global chrome */
+
 function emmitNotify (title) {
-  if (!chrome || !chrome.runtime) return;
+  if (!chrome || !chrome.runtime) return
   chrome.runtime.sendMessage(chrome.runtime.id, {
-    send: 'notify', 
+    send: 'notify',
     title: title
-  }, function(response) {
-    console.log(response.message);
-  });
+  }, function (response) {
+    console.log(response.message)
+  })
 }
 
-var lastTitle;
-var target = document.querySelector('head > title');
+var lastTitle
+var target = document.querySelector('head > title')
 
 var observer = new window.MutationObserver(
   function (mutations) {
-    var title;
+    var title
     mutations.forEach(
       function (mutation) {
-        title = mutation.target.textContent.trim();
+        title = mutation.target.textContent.trim()
         var titleReturn = [
           'YouTube',
           'Spotify',
           'Spotify Web Player',
           'Spotify Web Player - Spotify',
           'Google Play Music',
-          'Google Play Música',
+          'Google Play Música'
         ]
-        if (titleReturn.indexOf(title) !== -1) return;
-        if (title[0] === '\u25B6') title = title.substr(2, title.length);
-        title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '');
-        if (title === lastTitle) return;
-        emmitNotify(title);
-        lastTitle = title;
+        if (titleReturn.indexOf(title) !== -1) return
+        if (title[0] === '\u25B6') title = title.substr(2, title.length)
+        title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
+        if (title === lastTitle) return
+        emmitNotify(title)
+        lastTitle = title
       }
-    );
+    )
   }
-);
+)
 
-observer.observe(target, { 
-  subtree: true, 
+observer.observe(target, {
+  subtree: true,
   characterData: true,
-  childList: true 
-});
+  childList: true
+})
