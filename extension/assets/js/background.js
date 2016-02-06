@@ -3,36 +3,12 @@
 var registeredUrls = []
 var noNotify = []
 
-function getTabs () {
-  chrome.tabs.query({url: [
-    '*://*.deezer.com/*',
-    '*://*.youtube.com/*',
-    '*://*.spotify.com/*',
-    '*://play.google.com/music/*'
-  ]}, function (tabs) {
-    if (tabs.length > 0) {
-      tabs.forEach(function (tab) {
-        var audible = tab.audible ? 'tocando' : 'pronta'
-        console.log('Uma aba ' + audible + ': ' + tab.title + ' (' + tab.url + ').')
-        chrome.tabs.executeScript(tab.id, {file: 'assets/js/utils.js'})
-        chrome.tabs.executeScript(tab.id, {file: 'assets/js/observer.js'})
-        chrome.pageAction.show(tab.id)
-        var parser = document.createElement('a')
-        parser.href = tab.url
-        registeredUrls[tab.id] = parser.hostname
-      })
-    } else {
-      console.log('Nenhuma aba tocando.')
-    }
-  })
-}
-
-getTabs()
+Utils.getTabs()
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.url) {
     if (changeInfo.url.indexOf(registeredUrls[tab.id]) === -1) {
-      getTabs()
+      Utils.getTabs()
     }
   }
 })

@@ -1,5 +1,8 @@
 # Changelog #
 
+1.2.8
+- Melhoria na busca por aba
+
 1.2.7
 - Todo o código foi refeito para melhor manutenibilidade
 - Fluxos foram melhorados para evitar execução de métodos repetidamente

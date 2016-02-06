@@ -82,5 +82,25 @@ var Utils = {
     }, function () {
       console.log('Notificação disparada..')
     })
+  },
+  getTabs: function () {
+    var urls = Manifest.permissions.slice(0)
+    urls.splice(0, 2)
+    chrome.tabs.query({url: urls}, function (tabs) {
+      if (tabs.length > 0) {
+        tabs.forEach(function (tab) {
+          var audible = tab.audible ? 'tocando' : 'pronta'
+          console.log('Uma aba ' + audible + ': ' + tab.title + ' (' + tab.url + ').')
+          chrome.tabs.executeScript(tab.id, {file: 'assets/js/utils.js'})
+          chrome.tabs.executeScript(tab.id, {file: 'assets/js/observer.js'})
+          chrome.pageAction.show(tab.id)
+          var parser = document.createElement('a')
+          parser.href = tab.url
+          registeredUrls[tab.id] = parser.hostname
+        })
+      } else {
+        console.log('Nenhuma aba tocando.')
+      }
+    })
   }
 }
