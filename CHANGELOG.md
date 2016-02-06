@@ -1,5 +1,9 @@
 # Changelog #
 
+1.2.7
+- Todo o código foi refeito para melhor manutenibilidade
+- Fluxos foram melhorados para evitar execução de métodos repetidamente
+
 0.2.7
 - Correções na exibição de notificações
 

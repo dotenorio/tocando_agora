@@ -1,0 +1,6 @@
+{
+  "name": "Tocando Agora (beta)",
+  "dependencies": {
+    "async": "^1.5.2"
+  }
+}

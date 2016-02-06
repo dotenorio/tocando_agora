@@ -1,11 +1,13 @@
 {
   "manifest_version": 2,
   "name": "Tocando agora (beta)",
-  "version": "0.2.7",
+  "version": "1.2.7",
   "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.",
   "background": {
     "scripts": [
-      "background.js"
+      "assets/lib/async/dist/async.min.js",
+      "assets/js/utils.js",
+      "assets/js/background.js"
     ],
     "persistent": false
   },
@@ -18,10 +20,10 @@
     "*://play.google.com/music/*"
   ],
   "icons": {
-    "128": "icon_extension.png"
+    "128": "assets/img/icon_extension.png"
   },
   "page_action": {
-    "default_icon": "icon_pageaction_active.png",
+    "default_icon": "assets/img/icon_pageaction_active.png",
     "default_title": "Tocando agora (beta)"
   },
   "author": "Fernando Migliorini Tenório",

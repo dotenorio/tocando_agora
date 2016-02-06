@@ -1,0 +1,5 @@
+### Bower ###
+assets/lib
+.bower-cache
+.bower-registry
+.bower-tmp
