@@ -3,7 +3,7 @@
 function verifyYoutubeWatch (url) {
   var regexYoutubeWatch = new RegExp('youtube.com.*watch')
   if (!regexYoutubeWatch.test(url)) {
-    console.log(Manifest.name + ': ERRO! Não é uma página de vídeo do Youtube.')
+    console.log('ERRO! Não é uma página de vídeo do Youtube.')
     return
   }
   return true
@@ -12,7 +12,7 @@ function verifyYoutubeWatch (url) {
 function verifySplitGooglePlayMusic (title) {
   var splitGooglePlayMusic = title.split(' - ')
   if (splitGooglePlayMusic.length < 2 || splitGooglePlayMusic[1].trim() === 'Single') {
-    console.log(Manifest.name + ': ERRO! Google Play Música não está tocando.')
+    console.log('ERRO! Google Play Música não está tocando.')
     return
   }
   return true
@@ -45,16 +45,6 @@ var Utils = {
     title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
     return title
   },
-  emmitNotification: function (title, contextMessage) {
-    if (!chrome || !chrome.runtime) return
-    chrome.runtime.sendMessage(chrome.runtime.id, {
-      send: 'notify',
-      title: title,
-      contextMessage: contextMessage
-    }, function (response) {
-      console.log(response.message)
-    })
-  },
   contextMessage: function (url, title) {
     var contextMessage
     var regex = loadRegex()
@@ -72,6 +62,10 @@ var Utils = {
     return contextMessage
   },
   createNotification: function (title, id, contextMessage) {
+    if (noNotify.indexOf(id) !== -1) {
+      console.log('As notificações desta aba estão desabilitadas.')
+      return
+    }
     chrome.notifications.create(title + '_-_' + id, {
       title: Manifest.name,
       message: title,
@@ -80,7 +74,8 @@ var Utils = {
       iconUrl: 'assets/img/icon_notification.png',
       isClickable: true
     }, function () {
-      console.log('Notificação disparada..')
+      console.log('Notificação disparada.')
+      Utils.sendMessageToTab(id, title)
     })
   },
   getTabs: function () {
@@ -102,5 +97,16 @@ var Utils = {
         console.log('Nenhuma aba tocando.')
       }
     })
+  },
+  titleChanged: function (tab) {
+    title = Utils.treatTitle(tab.title.trim())
+    var contextMessage = Utils.contextMessage(tab.url, title)
+    if (!title || !contextMessage) return
+    Utils.createNotification(title, tab.id, contextMessage)   
+  },
+  sendMessageToTab: function (id, title) {
+    chrome.tabs.sendMessage(id, {playing: title}, function(response) {
+      console.log(response);
+    });
   }
 }

@@ -11,36 +11,10 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       Utils.getTabs()
     }
   }
-})
-
-chrome.runtime.onMessage.addListener(
-  function (request, sender, sendResponse) {
-    var log
-    var send = request.send
-    var url = sender.tab.url
-    var title = request.title || sender.tab.title
-    var contextMessage = request.contextMessage || sender.tab.contextMessage
-    var id = sender.tab.id
-
-    console.log()
-    if (!send) {
-      log = 'Não existe uma mensagem válida.'
-    } else if (!sender.tab) {
-      log = 'Não foi uma aba que enviou essa mensagem.'
-    } else if (noNotify.indexOf(sender.tab.id) !== -1) {
-      log = 'As notificações desta aba estão desabilitadas.'
-    }
-    if (log) {
-      console.log(log)
-      return sendResponse({message: log})
-    }
-    console.log('Recebido da url: ' + url + '.')
-    if (request.send === 'notify') {
-      Utils.createNotification(title, id, contextMessage)
-      return sendResponse({message: Manifest.name + ': ' + title.trim() + '.'})
-    }
+  if (changeInfo.title) {
+    Utils.titleChanged(tab) 
   }
-)
+})
 
 chrome.pageAction.onClicked.addListener(function (tab) {
   var indexOf = noNotify.indexOf(tab.id)
