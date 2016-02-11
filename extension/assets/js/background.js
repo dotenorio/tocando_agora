@@ -2,6 +2,7 @@
 
 var registeredUrls = []
 var noNotify = []
+var lastTitle
 
 Utils.getTabs()
 
@@ -11,8 +12,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       Utils.getTabs()
     }
   }
-  if (changeInfo.title) {
-    Utils.titleChanged(tab) 
+  if (changeInfo.title && (changeInfo.title !== lastTitle)) {
+    lastTitle = changeInfo.title
+    Utils.titleChanged(tab)
   }
 })
 
