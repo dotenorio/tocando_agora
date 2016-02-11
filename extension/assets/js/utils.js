@@ -27,6 +27,8 @@ function loadRegex () {
   }
 }
 
+var noNotify = []
+
 var Manifest = chrome.runtime.getManifest()
 
 var Utils = {
@@ -80,19 +82,19 @@ var Utils = {
     })
   },
   titleChanged: function (tab) {
-    title = Utils.treatTitle(tab.title.trim())
+    var title = Utils.treatTitle(tab.title.trim())
     if (!title) return
     var contextMessage = Utils.contextMessage(tab.url, title)
     if (!contextMessage) return
-    Utils.createNotification(title, tab.id, contextMessage)   
+    Utils.createNotification(title, tab.id, contextMessage)
   },
   sendMessageToTab: function (id, title) {
-    chrome.tabs.sendMessage(id, {playing: title}, function(response) {
+    chrome.tabs.sendMessage(id, {playing: title}, function (response) {
       if (response) {
         console.log(response)
       } else {
         console.log('Aba não notificada.')
       }
-    });
+    })
   }
 }

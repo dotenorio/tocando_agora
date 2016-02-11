@@ -1,7 +1,15 @@
-/* global chrome, Utils, Manifest, async */
+/* global chrome, Utils, async, noNotify */
 
-var noNotify = []
 var lastTitle = []
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (sender.tab) {
+    var tab = sender.tab
+    var audible = tab.audible ? 'tocando' : 'pronta'
+    console.log('Aba ' + audible + ': ' + tab.title + ' (' + tab.url + ').')
+    chrome.pageAction.show(tab.id)
+  }
+})
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.title) {
@@ -9,13 +17,13 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (changeInfo.title.split(' - ').length <= 1 || (
       lastTitle[tab.id] &&
       changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
-      lastTitle[tab.id] != changeInfo.title
+      lastTitle[tab.id] !== changeInfo.title
     )) {
       return
     }
     lastTitle[tab.id] = changeInfo.title
     // end Deezer feelings
-    Utils.titleChanged(tab) 
+    Utils.titleChanged(tab)
   }
 })
 
