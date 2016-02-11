@@ -1,20 +1,21 @@
 /* global chrome, Utils, Manifest, async */
 
-var registeredUrls = []
 var noNotify = []
-var lastTitle
-
-Utils.getTabs()
+var lastTitle = []
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  if (changeInfo.url) {
-    if (changeInfo.url.indexOf(registeredUrls[tab.id]) === -1) {
-      Utils.getTabs()
+  if (changeInfo.title) {
+    // Deezer feelings
+    if (changeInfo.title.split(' - ').length <= 1 || (
+      lastTitle[tab.id] &&
+      changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
+      lastTitle[tab.id] != changeInfo.title
+    )) {
+      return
     }
-  }
-  if (changeInfo.title && (changeInfo.title !== lastTitle)) {
-    lastTitle = changeInfo.title
-    Utils.titleChanged(tab)
+    lastTitle[tab.id] = changeInfo.title
+    // end Deezer feelings
+    Utils.titleChanged(tab) 
   }
 })
 

@@ -39,7 +39,8 @@ var Utils = {
       'Spotify Web Player',
       'Spotify Web Player - Spotify',
       'Google Play Music',
-      'Google Play Música'
+      'Google Play Música',
+      'Deezer'
     ]
     if (titleReturn.indexOf(title) !== -1) return
     title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
@@ -78,35 +79,20 @@ var Utils = {
       Utils.sendMessageToTab(id, title)
     })
   },
-  getTabs: function () {
-    var urls = Manifest.permissions.slice(0)
-    urls.splice(0, 2)
-    chrome.tabs.query({url: urls}, function (tabs) {
-      if (tabs.length > 0) {
-        tabs.forEach(function (tab) {
-          var audible = tab.audible ? 'tocando' : 'pronta'
-          console.log('Uma aba ' + audible + ': ' + tab.title + ' (' + tab.url + ').')
-          chrome.tabs.executeScript(tab.id, {file: 'assets/js/utils.js'})
-          chrome.tabs.executeScript(tab.id, {file: 'assets/js/observer.js'})
-          chrome.pageAction.show(tab.id)
-          var parser = document.createElement('a')
-          parser.href = tab.url
-          registeredUrls[tab.id] = parser.hostname
-        })
-      } else {
-        console.log('Nenhuma aba tocando.')
-      }
-    })
-  },
   titleChanged: function (tab) {
     title = Utils.treatTitle(tab.title.trim())
+    if (!title) return
     var contextMessage = Utils.contextMessage(tab.url, title)
-    if (!title || !contextMessage) return
+    if (!contextMessage) return
     Utils.createNotification(title, tab.id, contextMessage)   
   },
   sendMessageToTab: function (id, title) {
     chrome.tabs.sendMessage(id, {playing: title}, function(response) {
-      console.log(response);
+      if (response) {
+        console.log(response)
+      } else {
+        console.log('Aba não notificada.')
+      }
     });
   }
 }

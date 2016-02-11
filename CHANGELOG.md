@@ -1,7 +1,7 @@
 # Changelog #
 
-1.2.10
-- Melhoria no script que monitorava a troca de músicas
+1.3.11
+- Refeito o script que monitorava a troca de músicas e mais algumas melhorias
 
 1.2.9
 - Melhoria no script que monitorava a troca de músicas
