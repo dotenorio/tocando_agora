@@ -1,6 +1,7 @@
 /* global chrome, Utils, async, noNotify */
 
 var lastTitle = []
+var notification = []
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (sender.tab) {
@@ -13,16 +14,19 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.title) {
-    // Deezer feelings
-    if (changeInfo.title.split(' - ').length <= 1 || (
-      lastTitle[tab.id] &&
-      changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
-      lastTitle[tab.id] !== changeInfo.title
-    )) {
+    if (
+      notification[tab.title] ||
+      changeInfo.title.split(' - ').length <= 1 ||
+      (
+        lastTitle[tab.id] &&
+        changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
+        lastTitle[tab.id] !== changeInfo.title
+      )
+    ) {
       return
     }
     lastTitle[tab.id] = changeInfo.title
-    // end Deezer feelings
+    notification[tab.title] = true
     Utils.titleChanged(tab)
   }
 })

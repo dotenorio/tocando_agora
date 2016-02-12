@@ -1,5 +1,8 @@
 # Changelog #
 
+1.3.12
+- Tratamento para notificar corretamente Deezer e Spotify
+
 1.3.11
 - Refeito o script que monitorava a troca de músicas e mais algumas melhorias
 

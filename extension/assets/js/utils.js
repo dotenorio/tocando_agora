@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, notification */
 
 function verifyYoutubeWatch (url) {
   var regexYoutubeWatch = new RegExp('youtube.com.*watch')
@@ -83,9 +83,11 @@ var Utils = {
   },
   titleChanged: function (tab) {
     var title = Utils.treatTitle(tab.title.trim())
-    if (!title) return
     var contextMessage = Utils.contextMessage(tab.url, title)
-    if (!contextMessage) return
+    if (!title || !contextMessage) {
+      delete notification[tab.title]
+      return
+    }
     Utils.createNotification(title, tab.id, contextMessage)
   },
   sendMessageToTab: function (id, title) {
