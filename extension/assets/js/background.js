@@ -14,19 +14,21 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.title) {
-    if (
-      notification[tab.title] ||
-      changeInfo.title.split(' - ').length <= 1 ||
-      (
-        lastTitle[tab.id] &&
-        changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
-        lastTitle[tab.id] !== changeInfo.title
-      )
-    ) {
-      return
+    if (!Utils.isGooglePlayMusic(tab.url)) {
+      if (
+        notification[changeInfo.title] ||
+        changeInfo.title.split(' - ').length <= 1 ||
+        (
+          lastTitle[tab.id] &&
+          changeInfo.title.indexOf(lastTitle[tab.id]) !== -1 &&
+          lastTitle[tab.id] !== changeInfo.title
+        )
+      ) {
+        return
+      }
+      lastTitle[tab.id] = changeInfo.title
+      notification[changeInfo.title] = true
     }
-    lastTitle[tab.id] = changeInfo.title
-    notification[tab.title] = true
     Utils.titleChanged(tab)
   }
 })

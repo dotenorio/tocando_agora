@@ -10,6 +10,7 @@ function verifyYoutubeWatch (url) {
 }
 
 function verifySplitGooglePlayMusic (title) {
+  if (!title) return
   var splitGooglePlayMusic = title.split(' - ')
   if (splitGooglePlayMusic.length < 2 || splitGooglePlayMusic[1].trim() === 'Single') {
     console.log('ERRO! Google Play Música não está tocando.')
@@ -98,5 +99,11 @@ var Utils = {
         console.log('Aba não notificada.')
       }
     })
+  },
+  isGooglePlayMusic: function (url) {
+    var regex = loadRegex()
+    if (regex.GooglePlayMusic.test(url)) {
+      return true
+    }
   }
 }

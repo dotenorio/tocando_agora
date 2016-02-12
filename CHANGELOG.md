@@ -1,5 +1,8 @@
 # Changelog #
 
+1.3.13
+- Ignorando tratamento para notificar quando Google Play Música
+
 1.3.12
 - Tratamento para notificar corretamente Deezer e Spotify
 
