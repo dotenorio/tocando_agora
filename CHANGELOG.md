@@ -1,5 +1,8 @@
 # Changelog #
 
+1.4.16
+- Melhorando a exibição dos textos e imagens na notificação
+
 1.4.15
 - Correção de Manifest Inválido
 

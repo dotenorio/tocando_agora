@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tocando agora (beta)",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.",
   "background": {
     "scripts": [
@@ -43,7 +43,7 @@
   "commands": {
     "tocando-agora": {
       "suggested_key": {
-        "default": "Ctrl+Shift+A"
+        "default": "Ctrl+Shift+Y"
       },
       "description": "O que está tocando agora?",
       "global": true

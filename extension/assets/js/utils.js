@@ -1,4 +1,4 @@
-/* global chrome, notification */
+/* global chrome, notification, async */
 
 function verifyYoutubeWatch (url) {
   var regexYoutubeWatch = new RegExp('youtube.com.*watch')
@@ -49,52 +49,81 @@ var Utils = {
     title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
     return title
   },
-  contextMessage: function (url, title) {
-    var contextMessage
+  setNotificationMessage: function (url, title) {
+    var notificationMessage
     var regex = loadRegex()
     if (regex.Youtube.test(url)) {
       if (!verifyYoutubeWatch(url)) return
-      contextMessage = 'YouTube'
+      notificationMessage = 'YouTube'
     } else if (regex.Deezer.test(url)) {
-      contextMessage = 'Deezer'
+      notificationMessage = 'Deezer'
     } else if (regex.Spotify.test(url)) {
-      contextMessage = 'Spotify'
+      notificationMessage = 'Spotify'
     } else if (regex.GooglePlayMusic.test(url)) {
       if (!verifySplitGooglePlayMusic(title)) return
-      contextMessage = 'Google Play Music'
+      notificationMessage = 'Google Play Music'
     }
-    return contextMessage
+    return notificationMessage
   },
-  createNotification: function (title, id, contextMessage) {
+  setNotificationOptions: function (title, id, message, callback) {
+    var options = {
+      title: title,
+      message: message,
+      contextMessage: Manifest.name,
+      type: 'basic',
+      iconUrl: 'assets/img/icon_' + message.toLowerCase().replace(/\s/g, '') + '_notification.png',
+      isClickable: true
+    }
+    var splitTitle = title.split(' - ')
+    if (splitTitle.length >= 2) {
+      options.title = splitTitle[0]
+      options.message = splitTitle[splitTitle.length - 1]
+      options.contextMessage = Manifest.name
+      callback(options)
+    } else if (message === 'YouTube') {
+      Utils.sendMessageToTab(id, 'dom', 'yt-user-info', function (response) {
+        options.message = response
+        callback(options)
+      })
+    } else {
+      callback(options)
+    }
+  },
+  createNotification: function (title, id, message) {
     if (noNotify.indexOf(id) !== -1) {
       console.log('As notificações desta aba estão desabilitadas.')
       return
     }
-    chrome.notifications.create(title + '_-_' + id, {
-      title: Manifest.name,
-      message: title,
-      contextMessage: contextMessage,
-      type: 'basic',
-      iconUrl: 'assets/img/icon_notification.png',
-      isClickable: true
-    }, function () {
-      console.log('Notificação disparada.')
-      Utils.sendMessageToTab(id, title)
-    })
+    async.waterfall([
+      function (callback) {
+        Utils.setNotificationOptions(title, id, message, function (options) {
+          callback(null, options)
+        })
+      },
+      function (options, callback) {
+        chrome.notifications.create(title + '_-_' + id, options, function () {
+          console.log('Notificação disparada.')
+          Utils.sendMessageToTab(id, 'playing', title)
+        })
+      }
+    ])
   },
   titleChanged: function (tab) {
     var title = Utils.treatTitle(tab.title.trim())
-    var contextMessage = Utils.contextMessage(tab.url, title)
-    if (!title || !contextMessage) {
+    var message = Utils.setNotificationMessage(tab.url, title)
+    if (!title || !message) {
       delete notification[tab.title]
       return
     }
-    Utils.createNotification(title, tab.id, contextMessage)
+    Utils.createNotification(title, tab.id, message)
   },
-  sendMessageToTab: function (id, title) {
-    chrome.tabs.sendMessage(id, {playing: title}, function (response) {
+  sendMessageToTab: function (id, action, value, callback) {
+    var options = {}
+    options[action] = value
+    chrome.tabs.sendMessage(id, options, function (response) {
       if (response) {
-        console.log(response)
+        console.log('Resposta: ' + response)
+        if (callback) callback(response)
       } else {
         console.log('Aba não notificada.')
       }
