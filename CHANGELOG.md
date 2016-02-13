@@ -1,5 +1,8 @@
 # Changelog #
 
+1.4.14
+- Colocando a extensão "Key Socket Media Keys" como dependência
+
 1.4.13
 - Inserindo comando que permite ver o que está tocando agora
 
