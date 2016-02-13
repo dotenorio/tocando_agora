@@ -1,4 +1,4 @@
-/* global chrome, Utils, async, noNotify */
+/* global chrome, Utils, async, noNotify, Manifest */
 
 var lastTitle = []
 var notification = []
@@ -76,3 +76,16 @@ chrome.notifications.onClicked.addListener(function (notificationId) {
     })
   })
 })
+
+chrome.commands.onCommand.addListener(function (command) {
+  if (command === 'tocando-agora') {
+    console.log('Comando "tocando-agora" recebido.')
+    var urls = Manifest.permissions.slice(0)
+    urls.splice(0, 2)
+    chrome.tabs.query({url: urls, audible: true}, function (tabs) {
+      tabs.forEach(function (tab) {
+        Utils.titleChanged(tab)
+      })
+    })
+  }
+});

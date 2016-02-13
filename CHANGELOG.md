@@ -1,5 +1,8 @@
 # Changelog #
 
+1.4.13
+- Inserindo comando que permite ver o que está tocando agora
+
 1.3.13
 - Ignorando tratamento para notificar quando Google Play Música
 

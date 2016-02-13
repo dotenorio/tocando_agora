@@ -40,6 +40,15 @@
     "default_icon": "assets/img/icon_pageaction_active.png",
     "default_title": "Tocando agora (beta)"
   },
+  "commands": {
+    "tocando-agora": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "O que está tocando agora?",
+      "global": true
+    }
+  },
   "author": "Fernando Migliorini Tenório",
   "short_name": "Tocando agora"
 }
