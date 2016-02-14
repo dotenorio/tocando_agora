@@ -1,4 +1,4 @@
-# Tocando Agora (beta) #
+# Tocando agora (beta) #
 
 Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.
 
