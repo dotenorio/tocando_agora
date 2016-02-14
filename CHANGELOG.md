@@ -1,5 +1,8 @@
 # Changelog #
 
+1.5.16
+- Adicionando i18n (somente para manifest.json): 'pt_BR' e 'en'
+
 1.4.16
 - Melhorando a exibição dos textos e imagens na notificação
 

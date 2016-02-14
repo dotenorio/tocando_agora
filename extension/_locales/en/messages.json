@@ -1,0 +1,10 @@
+{
+  "extDescription": {
+    "message": "Extension to notify what song/video is playing on Deezer, Youtube, Spotify or Google Play Music.",
+    "description": "Extension description"
+  },
+  "cmdTocandoAgoraDesc": {
+    "message": "What is playing now?",
+    "description": "Description command 'tocando-agora'"
+  }
+}
