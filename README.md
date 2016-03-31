@@ -2,6 +2,8 @@
 
 Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.
 
+Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-agora-beta/ahlldljeehledjbbpfeklndmlkinhmfg)
+
 > *Recomendado o uso com [Key Socket Media Keys](https://goo.gl/XCIzG4)*
 
 ## Qualidade do código ##
