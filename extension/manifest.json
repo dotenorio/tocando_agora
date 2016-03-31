@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tocando agora (beta)",
-  "version": "1.5.16",
+  "version": "1.6.16",
   "default_locale": "pt_BR",
   "description": "__MSG_extDescription__",
   "background": {
@@ -51,5 +51,6 @@
     }
   },
   "author": "Fernando Migliorini Tenório",
-  "short_name": "Tocando agora"
+  "short_name": "Tocando agora",
+  "homepage_url": "https://github.com/dotenorio/tocando_agora"
 }

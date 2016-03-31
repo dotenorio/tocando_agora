@@ -1,0 +1,19 @@
+{
+  "name": "tocando_agora",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "standard"
+  },
+  "standard": {
+    "globals": [
+      "chrome"
+    ],
+    "ignore": [
+      "extension/assets/lib"
+    ]
+  },
+  "dependencies": {
+    "standard": "^6.0.5"
+  }
+}
