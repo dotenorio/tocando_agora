@@ -77,7 +77,7 @@ var Utils = {
     var splitTitle = title.split(' - ')
     if (splitTitle.length >= 2) {
       options.title = splitTitle[0]
-      options.message = splitTitle[splitTitle.length - 1]
+      options.message = splitTitle[1].split(' [')[0]
       options.contextMessage = Manifest.name
       callback(options)
     } else if (message === 'YouTube') {

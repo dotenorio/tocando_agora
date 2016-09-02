@@ -13,6 +13,9 @@ Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-ag
 
 ### Changelog ###
 
+* 1.6.17
+    * Melhorando tratamento do texto da notificação para alguns modelos de título
+
 * 1.6.16
     * Adicionando reposítório no GitHub
 
