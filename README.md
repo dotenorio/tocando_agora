@@ -13,6 +13,11 @@ Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-ag
 
 ### Changelog ###
 
+* 1.6.18
+    * Melhorando tratamento do texto da notificação para Spotify e Youtube
+    * Atualizando icones do Google Play Music e Youtube nas notificações
+    * Corrigindo notificações do Spotify que apareciam fora do player
+
 * 1.6.17
     * Melhorando tratamento do texto da notificação para alguns modelos de título
 

@@ -23,7 +23,7 @@ function loadRegex () {
   return {
     Youtube: new RegExp('youtube.com'),
     Deezer: new RegExp('deezer.com'),
-    Spotify: new RegExp('spotify.com'),
+    Spotify: new RegExp('open.spotify.com'),
     GooglePlayMusic: new RegExp('play.google.com')
   }
 }
@@ -47,6 +47,7 @@ var Utils = {
     ]
     if (titleReturn.indexOf(title) !== -1) return
     title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
+    title = title.replace(/^\([0-9]\)\s/, '')
     return title
   },
   setNotificationMessage: function (url, title) {
@@ -74,7 +75,12 @@ var Utils = {
       iconUrl: 'assets/img/icon_' + message.toLowerCase().replace(/\s/g, '') + '_notification.png',
       isClickable: true
     }
-    var splitTitle = title.split(' - ')
+
+    var splitTitle = title.split(' · ')
+    if (splitTitle.length < 2) {
+      splitTitle = title.split(' - ')
+    }
+
     if (splitTitle.length >= 2) {
       options.title = splitTitle[0]
       options.message = splitTitle[1].split(' [')[0]
@@ -132,6 +138,12 @@ var Utils = {
   isGooglePlayMusic: function (url) {
     var regex = loadRegex()
     if (regex.GooglePlayMusic.test(url)) {
+      return true
+    }
+  },
+  isSpotify: function (url, title) {
+    var regex = loadRegex()
+    if (regex.Spotify.test(url) && title.split(' · ').length >= 2) {
       return true
     }
   }

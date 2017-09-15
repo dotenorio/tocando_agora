@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.title) {
-    if (!Utils.isGooglePlayMusic(tab.url)) {
+    if (!Utils.isGooglePlayMusic(tab.url) && !Utils.isSpotify(tab.url, tab.title)) {
       if (
         notification[changeInfo.title] ||
         changeInfo.title.split(' - ').length <= 1 ||

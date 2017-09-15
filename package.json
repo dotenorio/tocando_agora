@@ -1,9 +1,9 @@
 {
   "name": "tocando_agora",
-  "version": "1.0.0",
+  "version": "1.6.18",
   "private": true,
   "scripts": {
-    "lint": "standard"
+    "lint": "standard --fix"
   },
   "standard": {
     "globals": [
