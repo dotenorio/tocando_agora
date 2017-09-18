@@ -13,6 +13,9 @@ Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-ag
 
 ### Changelog ###
 
+* 1.6.19
+    * Correção para pegar o nome do canal do youtube e exibir nas notificações do youtube
+
 * 1.6.18
     * Melhorando tratamento do texto da notificação para Spotify e Youtube
     * Atualizando icones do Google Play Music e Youtube nas notificações

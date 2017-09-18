@@ -1,6 +1,6 @@
 {
   "name": "tocando_agora",
-  "version": "1.6.18",
+  "version": "1.6.19",
   "private": true,
   "scripts": {
     "lint": "standard --fix"

@@ -9,8 +9,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(Manifest.name + ': ' + request.playing)
     sendResponse('Aba notificada.')
   }
-  if (request.dom === 'yt-user-info') {
+  if (request.dom === 'get-user-info') {
     console.log(Manifest.name + ': DOM "' + request.dom + '"')
-    sendResponse(document.getElementsByClassName('yt-user-info')[0].childNodes[1].text)
+    sendResponse(document.getElementById('owner-name').childNodes[0].text)
   }
 })

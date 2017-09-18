@@ -87,7 +87,7 @@ var Utils = {
       options.contextMessage = Manifest.name
       callback(options)
     } else if (message === 'YouTube') {
-      Utils.sendMessageToTab(id, 'dom', 'yt-user-info', function (response) {
+      Utils.sendMessageToTab(id, 'dom', 'get-user-info', function (response) {
         options.message = response
         callback(options)
       })
