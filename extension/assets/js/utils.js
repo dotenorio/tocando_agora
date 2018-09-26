@@ -1,7 +1,5 @@
-/* global chrome, notification, async */
-
 function verifyYoutubeWatch (url) {
-  var regexYoutubeWatch = new RegExp('youtube.com.*watch')
+  var regexYoutubeWatch = new RegExp(/youtube.com.*watch/)
   if (!regexYoutubeWatch.test(url)) {
     console.log('ERRO! Não é uma página de vídeo do Youtube.')
     return
@@ -24,7 +22,8 @@ function loadRegex () {
     Youtube: new RegExp('youtube.com'),
     Deezer: new RegExp('deezer.com'),
     Spotify: new RegExp('open.spotify.com'),
-    GooglePlayMusic: new RegExp('play.google.com')
+    GooglePlayMusic: new RegExp('play.google.com'),
+    YoutubeMusic: new RegExp('music.youtube.com')
   }
 }
 
@@ -33,7 +32,7 @@ var noNotify = []
 var Manifest = chrome.runtime.getManifest()
 
 var Utils = {
-  self: Utils,
+  self: this,
   treatTitle: function (title) {
     if (title[0] === '\u25B6') title = title.substr(2, title.length)
     var titleReturn = [
@@ -43,17 +42,20 @@ var Utils = {
       'Spotify Web Player - Spotify',
       'Google Play Music',
       'Google Play Música',
-      'Deezer'
+      'Deezer',
+      'Youtube Music'
     ]
     if (titleReturn.indexOf(title) !== -1) return
-    title = title.replace(/- (YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
+    title = title.replace(/- (YouTube Music|YouTube|Spotify|Google Play Music|Google Play Música)/i, '')
     title = title.replace(/^\([0-9]\)\s/, '')
     return title
   },
   setNotificationMessage: function (url, title) {
     var notificationMessage
     var regex = loadRegex()
-    if (regex.Youtube.test(url)) {
+    if (regex.YoutubeMusic.test(url)) {
+      notificationMessage = 'YouTube Music'
+    } else if (regex.Youtube.test(url)) {
       if (!verifyYoutubeWatch(url)) return
       notificationMessage = 'YouTube'
     } else if (regex.Deezer.test(url)) {
@@ -88,6 +90,11 @@ var Utils = {
       callback(options)
     } else if (message === 'YouTube') {
       Utils.sendMessageToTab(id, 'dom', 'get-user-info', function (response) {
+        options.message = response
+        callback(options)
+      })
+    } else if (message === 'YouTube Music') {
+      Utils.sendMessageToTab(id, 'dom', 'get-artist-info', function (response) {
         options.message = response
         callback(options)
       })

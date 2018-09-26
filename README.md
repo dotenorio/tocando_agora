@@ -13,6 +13,9 @@ Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-ag
 
 ### Changelog ###
 
+* 1.7.19
+    * Adicionando suporte ao Youtube Music
+
 * 1.6.19
     * Correção para pegar o nome do canal do youtube e exibir nas notificações do youtube
 

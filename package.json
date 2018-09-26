@@ -1,19 +1,39 @@
 {
   "name": "tocando_agora",
-  "version": "1.6.19",
+  "version": "1.7.19",
   "private": true,
   "scripts": {
     "lint": "standard --fix"
   },
   "standard": {
     "globals": [
-      "chrome"
+      "chrome",
+      "Utils",
+      "async",
+      "noNotify",
+      "Manifest",
+      "notification"
     ],
     "ignore": [
       "extension/assets/lib"
     ]
   },
-  "dependencies": {
-    "standard": "^6.0.5"
-  }
+  "devDependencies": {
+    "standard": "latest",
+    "bower": "^1.8.4"
+  },
+  "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify, Google Play Music ou Youtube Music.",
+  "main": "index.js",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotenorio/tocando_agora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dotenorio/tocando_agora/issues"
+  },
+  "homepage": "https://github.com/dotenorio/tocando_agora#readme"
 }

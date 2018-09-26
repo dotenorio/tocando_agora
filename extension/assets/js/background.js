@@ -1,5 +1,3 @@
-/* global chrome, Utils, async, noNotify, Manifest */
-
 var lastTitle = []
 var notification = []
 

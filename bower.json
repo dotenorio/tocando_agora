@@ -1,6 +1,6 @@
 {
-  "name": "Tocando agora (beta)",
+  "name": "tocando-agora",
   "dependencies": {
-    "async": "^1.5.2"
+    "async": "^2.6.1"
   }
 }
