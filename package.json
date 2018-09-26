@@ -22,7 +22,7 @@
     "standard": "latest",
     "bower": "^1.8.4"
   },
-  "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify, Google Play Music ou Youtube Music.",
+  "description": "Extensão para notificar qual música/vídeo está tocando no Deezer, YouTube, Spotify, Google Play Music ou YouTube Music.",
   "main": "index.js",
   "dependencies": {},
   "repository": {
