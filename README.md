@@ -13,6 +13,9 @@ Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-ag
 
 ### Changelog ###
 
+* 1.7.20
+    * Novo ícone para o Youtube Music
+
 * 1.7.19
     * Adicionando suporte ao Youtube Music
 
