@@ -1,6 +1,6 @@
 # Tocando agora (beta) #
 
-Extensão para notificar qual música/vídeo está tocando no Deezer, Youtube, Spotify ou Google Play Music.
+Extensão para notificar qual música/vídeo está tocando no Deezer, YouTube, Spotify, Google Play Music ou YouTube Music.
 
 Baixe na [Chrome Web Store](https://chrome.google.com/webstore/detail/tocando-agora-beta/ahlldljeehledjbbpfeklndmlkinhmfg)
 
